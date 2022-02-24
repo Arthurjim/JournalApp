@@ -1,3 +1,7 @@
-html,body{
-    background-color: red;
-}
+@import './base/settings.scss';
+@import './base/base.scss';
+
+//Components
+@import './components/auth.scss';
+@import './components/bottons';
+@import './components//links';
