@@ -1,0 +1,43 @@
+.journal__main-content{
+    display: flex;
+
+}
+.journal__sidebar{
+    background-color: $dark-grey;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 450px;
+}
+.journal__sidebad-navbar{
+    display: flex;
+    justify-content: space-between;
+    h3{
+        font-weight: lighter;
+    }
+}
+.journal__new-entry{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    flex-direction: column;
+    transition: color .4s ease;
+    &:hover{
+        color: darken($color: white, $amount: 20);
+    }
+}
+.journal__entries{
+    margin-top: 30px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.journal__entry{
+    
+}
