@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useForm from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
 import validator from "validator";
+import useForm from "../../hooks/useForm";
+import { removeError, setError } from "../../actions/ui";
 const RegisterScreen = () => {
     const [formValue, handleInput] = useForm({
         name: "Arturin",
@@ -9,7 +11,7 @@ const RegisterScreen = () => {
         password: "123456",
         password2: "123456",
     });
-
+    const dispatch = useDispatch();
     const { name, email, password, password2 } = formValue;
     const handleRegister = (e) => {
         e.preventDefault();
@@ -18,15 +20,20 @@ const RegisterScreen = () => {
 
     const isFormValid = () => {
         if (name.trim().length === 0) {
-            console.log("nombre invalido");
+            dispatch(setError("El nombre es requerido"));
             return false;
         } else if (!validator.isEmail(email)) {
-            console.log("email invalido");
+            dispatch(setError("email invalido"));
+
             return false;
-        } else if (password !== password2 || password.length <8) {
-          console.log("Password shuld be equalt and more than 8 characters");
-          return false;
+        } else if (password !== password2 || password.length < 8) {
+            dispatch(
+                setError("Password shuld be equalt and more than 8 characters")
+            );
+
+            return false;
         }
+        dispatch(removeError());
 
         return true;
     };
