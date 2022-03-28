@@ -1,26 +1,91 @@
-import React from 'react'
-import {Link}from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import useForm from "../../hooks/useForm";
+import validator from "validator";
 const RegisterScreen = () => {
-  return (
-    <>
- <>
-            <h3 className="auth__title">Login</h3>
-            <form>
-              <input className="auth__input" type="text" placeholder="name" name="name" autoComplete="off" />
+    const [formValue, handleInput] = useForm({
+        name: "Arturin",
+        email: "arturo@gmail.com",
+        password: "123456",
+        password2: "123456",
+    });
 
-                <input className="auth__input" type="text" placeholder="email" name="email" autoComplete="off" />
-                <input className="auth__input" type="password" placeholder="password" name="password" />
-                <input className="auth__input" type="password" placeholder="Confirm Password" name="password2" />
-                <button type="submit" className="btn btn-primary btn-block mb-5">Login</button>
-                <hr />
-           
-                <Link to="/auth/login" className="link mt-5">
-                  Already Register
-                </Link>
-            </form>
+    const { name, email, password, password2 } = formValue;
+    const handleRegister = (e) => {
+        e.preventDefault();
+        isFormValid();
+    };
+
+    const isFormValid = () => {
+        if (name.trim().length === 0) {
+            console.log("nombre invalido");
+            return false;
+        } else if (!validator.isEmail(email)) {
+            console.log("email invalido");
+            return false;
+        } else if (password !== password2 || password.length <8) {
+          console.log("Password shuld be equalt and more than 8 characters");
+          return false;
+        }
+
+        return true;
+    };
+    return (
+        <>
+            <>
+                <h3 className="auth__title">Login</h3>
+                <form onSubmit={handleRegister}>
+                    <div className="auth__alert-error">hola mundo</div>
+                    <input
+                        className="auth__input"
+                        type="text"
+                        placeholder="name"
+                        name="name"
+                        autoComplete="off"
+                        onChange={handleInput}
+                        value={name}
+                    />
+
+                    <input
+                        className="auth__input"
+                        type="text"
+                        placeholder="email"
+                        name="email"
+                        autoComplete="off"
+                        onChange={handleInput}
+                        value={email}
+                    />
+                    <input
+                        className="auth__input"
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                        onChange={handleInput}
+                        value={password}
+                    />
+                    <input
+                        className="auth__input"
+                        type="password"
+                        placeholder="Confirm Password"
+                        name="password2"
+                        onChange={handleInput}
+                        value={password2}
+                    />
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-block mb-5"
+                    >
+                        Login
+                    </button>
+                    <hr />
+
+                    <Link to="/auth/login" className="link mt-5">
+                        Already Register
+                    </Link>
+                </form>
+            </>
         </>
-    </>
-  )
-}
+    );
+};
 
-export default RegisterScreen
+export default RegisterScreen;
