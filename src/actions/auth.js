@@ -1,6 +1,11 @@
-import {  googleAuthProvider } from "../firebase/firebase-config";
+import { googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../components/types/types";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
@@ -8,6 +13,20 @@ export const startLoginEmailPassword = (email, password) => {
         setTimeout(() => {
             dispatch(login(email, password));
         }, 3500);
+    };
+};
+export const startRegisterManual = (email, password, name) => {
+    return (dispatch) => {
+        console.log("Paso por aqui");
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(async ({ user }) => {
+                await updateProfile(user, { displayName: name });
+                dispatch(login(user.uid, user.displayName));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 };
 
