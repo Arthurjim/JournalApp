@@ -5,19 +5,18 @@ import { login } from "../../actions/auth";
 import useForm from "../../hooks/useForm";
 
 const LoginScreen = () => {
-    const  [formValue,handleInput] = useForm({
+    const [formValue, handleInput] = useForm({
         email: "carapito@gmail.com",
         password: "1234421",
-    })
+    });
     const dispatch = useDispatch();
 
-    const {email, password} = formValue;
+    const { email, password } = formValue;
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(login(13265,"arthurjim013@gmail.com"))
-
-    }
+        dispatch(login(13265, "arthurjim013@gmail.com"));
+    };
     return (
         <>
             <h3 className="auth__title">Login</h3>
