@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { login, startGoogleLogin } from "../../actions/auth";
+import {
+    login,
+    startGoogleLogin,
+    startLoginEmailPassword,
+} from "../../actions/auth";
 import useForm from "../../hooks/useForm";
 
 const LoginScreen = () => {
     const [formValue, handleInput] = useForm({
-        email: "carapito@gmail.com",
-        password: "1234421",
+        email: "arturo@gmail.com",
+        password: "12345678",
     });
     const dispatch = useDispatch();
 
@@ -15,11 +19,14 @@ const LoginScreen = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        if(email.trim() === "" || password.trim() === ""){
+            return;
+        }
+        dispatch(startLoginEmailPassword(email, password));
     };
-    const handleGoogleLogin=()=>{
-        dispatch(startGoogleLogin())
-    }
+    const handleGoogleLogin = () => {
+        dispatch(startGoogleLogin());
+    };
     return (
         <>
             <h3 className="auth__title">Login</h3>

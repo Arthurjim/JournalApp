@@ -5,14 +5,23 @@ import {
     signInWithPopup,
     createUserWithEmailAndPassword,
     updateProfile,
+    signInWithEmailAndPassword 
+    
 } from "firebase/auth";
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
         //dispatch lo obtenemos gracias a thunk
-        setTimeout(() => {
-            dispatch(login(email, password));
-        }, 3500);
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({user})=>{
+                dispatch(login(user.uid,user.displayName))
+            })        
+            .then((error)=>{
+                console.log('error')
+            })
+        
+            // dispatch(login(email, password));
     };
 };
 export const startRegisterManual = (email, password, name) => {
