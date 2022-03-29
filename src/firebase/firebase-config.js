@@ -13,12 +13,13 @@ const firebaseConfig = {
     appId: process.env.APP_ID,
 };
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const googleAuthProvider = new GoogleAuthProvider();
 
 export {
+    firebase,
     db,
     googleAuthProvider,
 
