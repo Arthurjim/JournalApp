@@ -8,17 +8,22 @@ import {
     signInWithEmailAndPassword 
     
 } from "firebase/auth";
+import { finishLoading, startLoading } from "./ui";
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
         //dispatch lo obtenemos gracias a thunk
+        dispatch(startLoading());
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then(({user})=>{
                 dispatch(login(user.uid,user.displayName))
+                dispatch(finishLoading());
             })        
-            .then((error)=>{
-                console.log('error')
+            .catch((error)=>{
+                dispatch(finishLoading());
+
+                console.log(error)
             })
         
             // dispatch(login(email, password));

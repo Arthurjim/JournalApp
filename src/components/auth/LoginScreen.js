@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import {
-    login,
+    
     startGoogleLogin,
     startLoginEmailPassword,
 } from "../../actions/auth";
@@ -14,7 +14,8 @@ const LoginScreen = () => {
         password: "12345678",
     });
     const dispatch = useDispatch();
-
+    const { isLoading } = useSelector((state) => state.ui);
+    console.log(isLoading);
     const { email, password } = formValue;
 
     const handleLogin = (e) => {
@@ -48,7 +49,7 @@ const LoginScreen = () => {
                     onChange={handleInput}
                     value={password}
                 />
-                <button type="submit" className="btn btn-primary btn-block">
+                <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>
                     Login
                 </button>
                 <hr />
