@@ -16,9 +16,9 @@ const AppRouter = () => {
     const [isLoggeIn, setIsLoggeIn] = useState(false);
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, ({ displayName, uid }) => {
-            if (displayName) {
-                dispatch(login(uid, displayName));
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                dispatch(login(user.uid, user.displayName));
                 setIsLoggeIn(true);
             } else {
                 setIsLoggeIn(false);
@@ -26,7 +26,7 @@ const AppRouter = () => {
             setCheking(false);
         });
     }, [setCheking, setIsLoggeIn]);
-    if (!cheking) {
+    if (cheking) {
         return <div>Loading...</div>;
     }
     return (
@@ -35,7 +35,6 @@ const AppRouter = () => {
                 <Switch>
                     <Route path="/auth" component={AuthRouter} />
                     <Route exact path="/" component={JournalScreen} />
-                    <Redirect to="/auth/login" />
                 </Switch>
             </div>
         </Router>
