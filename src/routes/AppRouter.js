@@ -29,7 +29,7 @@ const AppRouter = () => {
         });
     }, [dispatch,setCheking, setIsLoggeIn]);
     if (cheking) {
-        return <div>Loading...</div>;
+        return <div>Wait...</div>;
     }
     return (
         <Router>
