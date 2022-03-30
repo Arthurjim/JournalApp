@@ -21,3 +21,10 @@ export const activeNote =(id,note)=>({
         ...note
     }
 });
+
+export const setNotes=(notes)=>{
+    return{
+        type:types.notesLoad,
+        payload:notes
+    }
+}

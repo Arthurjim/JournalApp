@@ -12,16 +12,20 @@ import { login } from "../actions/auth";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import { Redirect } from "react-router-dom";
+import { loadNotes } from "../helpers/loadNotes";
+import { setNotes } from "../actions/notes";
 const AppRouter = () => {
     const dispatch = useDispatch();
     const [cheking, setCheking] = useState(true);
     const [isLoggeIn, setIsLoggeIn] = useState(false);
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggeIn(true);
+                const notes =await loadNotes(user.uid)
+                dispatch(setNotes(notes))
             } else {
                 setIsLoggeIn(false);
             }
