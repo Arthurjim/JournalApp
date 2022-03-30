@@ -8,6 +8,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
+import Swal from 'sweetalert2'
 import { finishLoading, startLoading } from "./ui";
 
 export const startLoginEmailPassword = (email, password) => {
@@ -20,10 +21,10 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(login(user.uid, user.displayName));
                 dispatch(finishLoading());
             })
-            .catch((error) => {
+            .catch((e) => {
                 dispatch(finishLoading());
-
-                console.log(error);
+                Swal.fire('Error', e.message, 'error');
+                    
             });
 
         // dispatch(login(email, password));
@@ -37,8 +38,8 @@ export const startRegisterManual = (email, password, name) => {
                 await updateProfile(user, { displayName: name });
                 dispatch(login(user.uid, user.displayName));
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((e) => {
+                Swal.fire('Error', e.message, 'error');
             });
     };
 };
