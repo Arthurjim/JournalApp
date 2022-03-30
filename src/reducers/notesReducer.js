@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import { types } from "../components/types/types";
 
 /**
     {
@@ -20,12 +20,15 @@ const initialState = {
 };
 export const notesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'types.adf':
-            return state
-            break;
+        case  types.notesActive:
+            return {
+                ...state,
+                active:{
+                    ...action.payload
+                }
+            }
 
         default:
             return state
-            break;
     }
 };

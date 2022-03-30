@@ -1,10 +1,11 @@
-import { types } from "../types/types";
+import { types } from "../components/types/types";
 /**
     {
         uid:'asdfasdf',
         name:"Arturo"
     }
  */
+
 
 
 export const authReducer =(state ={},action)=>{

@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import { types } from "../components/types/types";
 
 const initialState = {
     isLoading: false,
