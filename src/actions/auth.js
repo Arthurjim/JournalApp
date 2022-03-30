@@ -5,8 +5,8 @@ import {
     signInWithPopup,
     createUserWithEmailAndPassword,
     updateProfile,
-    signInWithEmailAndPassword 
-    
+    signInWithEmailAndPassword,
+    signOut,
 } from "firebase/auth";
 import { finishLoading, startLoading } from "./ui";
 
@@ -16,22 +16,21 @@ export const startLoginEmailPassword = (email, password) => {
         dispatch(startLoading());
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
-            .then(({user})=>{
-                dispatch(login(user.uid,user.displayName))
+            .then(({ user }) => {
+                dispatch(login(user.uid, user.displayName));
                 dispatch(finishLoading());
-            })        
-            .catch((error)=>{
+            })
+            .catch((error) => {
                 dispatch(finishLoading());
 
-                console.log(error)
-            })
-        
-            // dispatch(login(email, password));
+                console.log(error);
+            });
+
+        // dispatch(login(email, password));
     };
 };
 export const startRegisterManual = (email, password, name) => {
     return (dispatch) => {
-        console.log("Paso por aqui");
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then(async ({ user }) => {
@@ -64,3 +63,16 @@ export const login = (uid, displayName) => {
         },
     };
 };
+export const startLogout = () => {
+    return (dispatch) => {
+        const auth = getAuth();
+        signOut(auth)
+            .then(() => {
+                dispatch(logout());
+            })
+            .catch((e) => console.log(e));
+    };
+};
+export const logout = () => ({
+    type: types.logout,
+});

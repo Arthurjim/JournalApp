@@ -15,7 +15,6 @@ const LoginScreen = () => {
     });
     const dispatch = useDispatch();
     const { isLoading } = useSelector((state) => state.ui);
-    console.log(isLoading);
     const { email, password } = formValue;
 
     const handleLogin = (e) => {

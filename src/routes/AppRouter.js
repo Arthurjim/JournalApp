@@ -26,7 +26,7 @@ const AppRouter = () => {
             setCheking(false);
         });
     }, [setCheking, setIsLoggeIn]);
-    if (cheking) {
+    if (!cheking) {
         return <div>Loading...</div>;
     }
     return (
