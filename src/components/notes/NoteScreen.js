@@ -18,10 +18,10 @@ const NoteScreen = () => {
         }
     }, [note, reset]);
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(activeNote(note.id, formValue));
-
-    },[formValue])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formValue]);
     return (
         <div className="notes__main-content">
             <NotesAppBar />
