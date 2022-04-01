@@ -22,22 +22,27 @@ const NoteScreen = () => {
         dispatch(activeNote(note.id, formValue));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formValue]);
-    const handleDelete =()=>{
-        dispatch(startDelete(note.id))
-    }
+    const handleDelete = () => {
+        dispatch(startDelete(note.id));
+    };
     return (
         <div className="notes__main-content">
             <NotesAppBar />
             <div className="notes__content">
-                <input
-                    type="text"
-                    placeholder="Some awesome title"
-                    className="notes__title-input"
-                    autoComplete="off"
-                    name="title"
-                    onChange={hanldeInputChange}
-                    value={title}
-                />
+                <div className="note__title">
+                    <input
+                        type="text"
+                        placeholder="Some awesome title"
+                        className="notes__title-input"
+                        autoComplete="off"
+                        name="title"
+                        onChange={hanldeInputChange}
+                        value={title}
+                    />
+                    <button className="btn btn-danger" onClick={handleDelete}>
+                        DELETE
+                    </button>
+                </div>
                 <textarea
                     placeholder="What happend today"
                     className="note__textarea"
@@ -47,16 +52,10 @@ const NoteScreen = () => {
                 ></textarea>
                 {note.url && (
                     <div className="note__image">
-                        <img
-                            src={note.url}
-                            alt="images"
-                        />
+                        <img src={note.url} alt="images" />
                     </div>
                 )}
             </div>
-            <button className="btn btn-danger" onClick={handleDelete}>
-                    Delete
-            </button>
         </div>
     );
 };

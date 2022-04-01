@@ -104,6 +104,8 @@ export const startUploading = (file) => {
 export const startDelete =(id)=>{
     return(dispatch,getState)=>{
         const {uid} = getState().auth;
+        const {url} = getState().notes.active;
+
         const noteRef = doc(db,`${uid}/journal/notes/${id}`);
         Swal.fire({
             title: "Are you sure?",
@@ -116,7 +118,10 @@ export const startDelete =(id)=>{
         }).then(async (result) => {
             if (result.value) {
                 await deleteDoc(noteRef);
+                if(url){
+                }
                 dispatch(deleteNote(id));
+
                 Swal.fire("Deleted!", "Your note has been deleted.", "success");
             }
         });
@@ -128,6 +133,8 @@ const deleteNote =(id)=>{
         payload:id
     }
 }
+
+
 export const clearNotes =()=>{
     return{
         type:types.notesLogout
