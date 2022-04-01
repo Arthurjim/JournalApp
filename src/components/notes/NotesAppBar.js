@@ -9,7 +9,6 @@ const NotesAppBar = () => {
         dispatch(startSaveNote(note));
     };
     const handlePictureClick = () => {
-        console.log("picture");
         document.getElementById("fileInput").click();
     };
     const handleFileChange = (e) => {

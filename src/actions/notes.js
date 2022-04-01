@@ -1,4 +1,4 @@
-import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { types } from "../components/types/types";
 import { db } from "../firebase/firebase-config";
@@ -87,5 +87,33 @@ export const startUploading = (file) => {
         activeNote.url =fileUrl
         dispatch(startSaveNote(activeNote));
         Swal.close();
+    }
+}
+
+export const startDelete =(id)=>{
+    return(dispatch,getState)=>{
+        const {uid} = getState().auth;
+        const noteRef = doc(db,`${uid}/journal/notes/${id}`);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.value) {
+                await deleteDoc(noteRef);
+                dispatch(deleteNote(id));
+                Swal.fire("Deleted!", "Your note has been deleted.", "success");
+            }
+        });
+    }
+}
+const deleteNote =(id)=>{
+    return{
+        type:types.notesDelete,
+        payload:id
     }
 }
