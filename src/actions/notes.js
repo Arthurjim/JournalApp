@@ -17,6 +17,7 @@ export const startNewNote = () => {
             newNote
         );
         dispatch(activeNote(doc.id, newNote));
+        dispatch(addNewNote(doc.id, newNote))
     };
 };
 
@@ -29,6 +30,16 @@ export const activeNote = (id, note) => {
         },
     };
 };
+
+export const addNewNote = (id,note) => {
+    return {
+        type:types.notesAddNew,
+        payload:{
+            id,
+            ...note
+        }
+    }
+}
 
 export const setNotes = (notes) => {
     return {
