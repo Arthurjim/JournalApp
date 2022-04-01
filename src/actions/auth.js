@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import Swal from 'sweetalert2'
 import { finishLoading, startLoading } from "./ui";
+import { clearNotes } from "./notes";
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
@@ -70,6 +71,8 @@ export const startLogout = () => {
         signOut(auth)
             .then(() => {
                 dispatch(logout());
+                dispatch(clearNotes())
+
             })
             .catch((e) => console.log(e));
     };

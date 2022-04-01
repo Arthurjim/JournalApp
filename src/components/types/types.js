@@ -13,7 +13,7 @@ export const types = {
     notesUpdated:'[Notes] Updated note',
     notesFileUrl:'[Notes] Updated file url',
     notesDelete:'[Notes] Delete note',
-    noetsLogout:'[Notes] Logout',
+    notesLogout:'[Notes] Logout',
 
 
 
