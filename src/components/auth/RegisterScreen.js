@@ -90,11 +90,13 @@ const RegisterScreen = () => {
                     >
                         Login
                     </button>
-                    <hr />
 
-                    <Link to="/auth/login" className="link mt-5">
-                        Already Register
-                    </Link>
+                    <div className="mt-5">
+                    <hr />
+                        <Link to="/auth/login" className="link ">
+                            Already Register
+                        </Link>
+                    </div>
                 </form>
             </>
         </>

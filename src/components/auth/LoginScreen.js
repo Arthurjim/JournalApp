@@ -49,12 +49,11 @@ const LoginScreen = () => {
                     onChange={handleInput}
                     value={password}
                 />
-                <button type="submit" className="btn btn-primary btn-block" disabled={isLoading}>
+                <button type="submit" className="btn btn-primary btn-block mt-5" disabled={isLoading}>
                     Login
                 </button>
-                <hr />
                 <div className="auth__solcial-networks">
-                    <p>Login with social networks</p>
+                    <p className="mt-5 mb-5">Login with social networks</p>
                     <div className="google-btn" onClick={handleGoogleLogin}>
                         <div className="google-icon-wrapper">
                             <img
